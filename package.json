@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/Tactless7/vue-doc-generator/issues"
   },
-  "homepage": "https://github.com/Tactless7/vue-doc-generator#readme"
+  "homepage": "https://github.com/Tactless7/vue-doc-generator#readme",
+  "dependencies": {
+    "commander": "^2.15.1"
+  }
 }
