@@ -1,0 +1,27 @@
+{
+  "name": "vue-doc-generator",
+  "version": "0.0.1",
+  "description": "Documentation generator for VueJS ",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R nyan ./test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tactless7/vue-doc-generator.git"
+  },
+  "keywords": [
+    "vuejs",
+    "vue",
+    "doc",
+    "cli",
+    "generator",
+    "webpack"
+  ],
+  "author": "Leo DUMON, Juliane BLIER, Tristan VIDE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tactless7/vue-doc-generator/issues"
+  },
+  "homepage": "https://github.com/Tactless7/vue-doc-generator#readme"
+}
