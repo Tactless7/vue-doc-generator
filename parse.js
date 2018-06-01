@@ -20,6 +20,13 @@ module.exports = {
         object.props.push(prop);
       })
 
+      content.replace(/(?:@component )(?:(?: |))(.*?(?= - ))(?: - )(.*)/gm, (match, name, required) => {
+        if (!object.components) { object.components = [] }
+        let component;
+        component.name = name;
+        component.required = required === 'required' ? true : false;
+        object.components.push(component);
+      })
     })
   }
 }
