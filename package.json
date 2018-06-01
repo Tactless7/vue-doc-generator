@@ -4,7 +4,7 @@
   "description": "Documentation generator for VueJS ",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -R nyan ./test/index.js"
+    "test": "mocha ./test/index.js && mocha -R nyan ./test/index.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
-    "eslint-plugin-babel": "^5.1.0"
+    "eslint-plugin-babel": "^5.1.0",
+    "unit.js": "^2.0.0"
   }
 }
