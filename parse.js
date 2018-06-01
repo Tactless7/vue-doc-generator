@@ -27,6 +27,21 @@ module.exports = {
         component.required = required === 'required' ? true : false;
         object.components.push(component);
       })
+
+      content.repace(/(?:@event)(?:(?: |))(.*?(?= \())(?: \()(.*?(?=\) - ))(?:\) - )(.*)/gm, (match, name, args, description) => {
+        if(!object.events) { object.events = [] }
+        let event;
+        event.name = name;
+        event.description = description;
+        args.replace(/(?:\,\ |)(.*?(?=\ \{)) (?:\{)(.*?(?=\}))(?:\})/gm, (match, name, type) => {
+          if(!event.arguments) { event.arguments = [] }
+          let argument;
+          argument.name = name;
+          argument.type = type;
+          event.arguments.push(argument);
+        });
+        object.events.push(event);
+      })
     })
   }
 }
