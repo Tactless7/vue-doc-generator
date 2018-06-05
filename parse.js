@@ -1,5 +1,11 @@
+const fs = require('fs');
+
 module.exports = {
-  parseCommentaries (file) {
+  parseFile (path) {
+    const file = fs.readFileSync(path, 'utf8');
+    const commentBlock = this.parseCommentaries(file);
+  },
+  parseCommentaries (text) {
     let object = {};
     text = text.replace(/(?:\/\*\*)((?:.|\n)*?)(?:\*\/)/gm, (match, content) => {
 
@@ -13,7 +19,7 @@ module.exports = {
 
       content.replace(/(?:@prop )(?:{)(.*)(?:})(?:(?: |))(.*?(?= - ))(?: - )(.*)/gm, (match, type, title, description) => {
         if (!object.props) { object.props = [] }
-        let prop;
+        let prop = {};
         prop.type = type;
         prop.title = title;
         prop.description = description;
@@ -22,20 +28,20 @@ module.exports = {
 
       content.replace(/(?:@component )(?:(?: |))(.*?(?= - ))(?: - )(.*)/gm, (match, name, required) => {
         if (!object.components) { object.components = [] }
-        let component;
+        let component = {};
         component.name = name;
         component.required = required === 'required' ? true : false;
         object.components.push(component);
       })
 
-      content.repace(/(?:@event)(?:(?: |))(.*?(?= \())(?: \()(.*?(?=\) - ))(?:\) - )(.*)/gm, (match, name, args, description) => {
+      content.replace(/(?:@event)(?:(?: |))(.*?(?= \())(?: \()(.*?(?=\) - ))(?:\) - )(.*)/gm, (match, name, args, description) => {
         if(!object.events) { object.events = [] }
-        let event;
+        let event = {};
         event.name = name;
         event.description = description;
         args.replace(/(?:\,\ |)(.*?(?=\ \{)) (?:\{)(.*?(?=\}))(?:\})/gm, (match, name, type) => {
           if(!event.arguments) { event.arguments = [] }
-          let argument;
+          let argument = {};
           argument.name = name;
           argument.type = type;
           event.arguments.push(argument);
@@ -43,5 +49,7 @@ module.exports = {
         object.events.push(event);
       })
     })
+
+    return object;
   }
 }
